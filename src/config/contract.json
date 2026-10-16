@@ -1,0 +1,8 @@
+{
+  "chainId": 968,
+  "chainName": "Bohr Testnet",
+  "rpcUrl": "https://rpc.bohr.life",
+  "explorerUrl": "https://scan.bohr.life",
+  "contractAddress": "0x75749a555f5314423e262139df363d08d86296d7",
+  "deployedAt": "2026-10-16T04:40:36.041Z"
+}
