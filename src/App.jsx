@@ -12,7 +12,8 @@ import { ContractSettingsModal } from './components/ContractSettingsModal';
 import { AuditHistoryModal } from './components/AuditHistoryModal';
 import { EditTagModal } from './components/EditTagModal';
 import { RevokeTagModal } from './components/RevokeTagModal';
-import { Tag, Search, UserCheck, Activity, ExternalLink, ShieldCheck } from 'lucide-react';
+import { WhitepaperModal } from './components/WhitepaperModal';
+import { Tag, Search, UserCheck, Activity, ExternalLink, ShieldCheck, BookOpen } from 'lucide-react';
 import { CONTRACT_ADDRESS } from './config/contractConfig';
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const queryClient = new QueryClient();
 function MainApp() {
   const [activeTab, setActiveTab] = useState('tag'); // 'tag' | 'search' | 'my-tags' | 'recent'
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isWhitepaperOpen, setIsWhitepaperOpen] = useState(false);
   const [activeContractAddress, setActiveContractAddress] = useState(CONTRACT_ADDRESS);
 
   // Modal states for history, edit, revoke
@@ -62,7 +64,10 @@ function MainApp() {
   return (
     <div className="app-container">
       {/* Top Navbar */}
-      <Header onOpenSettings={() => setIsSettingsOpen(true)} />
+      <Header
+        onOpenSettings={() => setIsSettingsOpen(true)}
+        onOpenWhitepaper={() => setIsWhitepaperOpen(true)}
+      />
 
       {/* Main Workspace */}
       <main className="main-content">
@@ -159,6 +164,13 @@ function MainApp() {
           </a>
           <button
             type="button"
+            onClick={() => setIsWhitepaperOpen(true)}
+            style={{ background: 'transparent', border: 'none', color: 'var(--yellow-light)', cursor: 'pointer', fontSize: '13px', textDecoration: 'underline' }}
+          >
+            Technical Whitepaper
+          </button>
+          <button
+            type="button"
             onClick={() => setIsSettingsOpen(true)}
             style={{ background: 'transparent', border: 'none', color: 'var(--yellow-light)', cursor: 'pointer', fontSize: '13px', textDecoration: 'underline' }}
           >
@@ -168,6 +180,11 @@ function MainApp() {
       </footer>
 
       {/* Modals */}
+      <WhitepaperModal
+        isOpen={isWhitepaperOpen}
+        onClose={() => setIsWhitepaperOpen(false)}
+      />
+
       <ContractSettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}

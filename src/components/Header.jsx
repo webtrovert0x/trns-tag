@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useAppKit } from '@reown/appkit/react';
-import { Tag, ShieldCheck, ExternalLink, Settings, Wallet, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Tag, ShieldCheck, ExternalLink, Settings, Wallet, CheckCircle2, AlertCircle, BookOpen } from 'lucide-react';
 import { CONTRACT_ADDRESS, formatAddress } from '../config/contractConfig';
 
-export function Header({ onOpenSettings }) {
+export function Header({ onOpenSettings, onOpenWhitepaper }) {
   const { address, isConnected, chainId } = useAccount();
   const { disconnect } = useDisconnect();
   const { open } = useAppKit();
@@ -63,6 +63,18 @@ export function Header({ onOpenSettings }) {
         </div>
 
         <div className="header-actions">
+          {/* Whitepaper Button */}
+          <button
+            type="button"
+            className="btn-secondary"
+            onClick={onOpenWhitepaper}
+            style={{ padding: '8px 12px', fontSize: '12px' }}
+            title="Read Technical Whitepaper"
+          >
+            <BookOpen size={14} color="var(--yellow-primary)" />
+            Whitepaper
+          </button>
+
           {/* Live RPC Status */}
           <div className="network-badge" title="Connected to Bohr Testnet RPC (Chain ID 968)">
             <span className="pulse-dot"></span>
