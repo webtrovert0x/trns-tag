@@ -89,7 +89,7 @@ export function MyTagsView({ onSelectHistory, onSelectEdit, onSelectRevoke, onOp
       {loading ? (
         <div style={{ textAlign: 'center', padding: '40px 0', color: 'var(--text-muted)' }}>
           <Loader2 size={28} className="animate-spin" style={{ margin: '0 auto 10px', color: 'var(--yellow-primary)' }} />
-          <div>Loading your annotations from Bohr Testnet...</div>
+          <div>Loading your annotations from BotChain Mainnet...</div>
         </div>
       ) : error ? (
         <div style={{ background: 'var(--danger-bg)', padding: '12px', borderRadius: 'var(--radius-md)', color: '#fca5a5', fontSize: '13px' }}>
@@ -178,7 +178,7 @@ export function MyTagsView({ onSelectHistory, onSelectEdit, onSelectRevoke, onOp
                   <div className="data-item-label">Target Transaction Hash</div>
                   <div className="data-item-value" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <a
-                      href={`https://scan.bohr.life/tx/${tag.txHash}`}
+                      href={`https://scan.botchain.ai/tx/${tag.txHash}`}
                       target="_blank"
                       rel="noreferrer"
                       style={{ color: 'var(--yellow-light)', textDecoration: 'none', fontFamily: 'var(--font-mono)' }}
@@ -192,7 +192,7 @@ export function MyTagsView({ onSelectHistory, onSelectEdit, onSelectRevoke, onOp
                     >
                       {copiedId === `my-tx-${tagIdNum}` ? <Check size={12} color="#4ade80" /> : <Copy size={12} />}
                     </button>
-                    <a href={`https://scan.bohr.life/tx/${tag.txHash}`} target="_blank" rel="noreferrer" style={{ color: 'var(--text-muted)' }}>
+                    <a href={`https://scan.botchain.ai/tx/${tag.txHash}`} target="_blank" rel="noreferrer" style={{ color: 'var(--text-muted)' }}>
                       <ExternalLink size={12} />
                     </a>
                   </div>

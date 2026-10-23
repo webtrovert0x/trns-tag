@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 /**
  * @title TransactionTagRegistry
  * @dev Public registry for adding searchable, auditable annotations and tags to blockchain transactions.
- * Designed for DAOs, accountants, developers, and businesses on Bohr Network (Chain ID 968).
+ * Designed for DAOs, accountants, developers, and businesses on BotChain Mainnet (Chain ID 677).
  *
  * NOTE & DISCLAIMER:
  * Tags are annotations and subjective metadata, NOT cryptographic proof that a payment

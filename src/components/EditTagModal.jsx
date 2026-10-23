@@ -199,7 +199,7 @@ export function EditTagModal({ isOpen, tagId, tagData, onClose, onUpdated }) {
                 ) : isConfirming ? (
                   <>
                     <Loader2 size={16} className="animate-spin" />
-                    Updating on Bohr...
+                    Updating on BotChain...
                   </>
                 ) : (
                   'Save Changes'

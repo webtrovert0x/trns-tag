@@ -22,17 +22,17 @@ export function WhitepaperModal({ isOpen, onClose }) {
           <div style={{ background: 'var(--bg-input)', border: '1px solid var(--border-medium)', borderRadius: 'var(--radius-md)', padding: '16px', marginBottom: '20px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px', fontSize: '12.5px' }}>
               <div><strong style={{ color: 'var(--text-main)' }}>Version:</strong> 1.0.0 (October 2026)</div>
-              <div><strong style={{ color: 'var(--text-main)' }}>Network:</strong> Bohr Testnet (Chain ID 968)</div>
-              <div><strong style={{ color: 'var(--text-main)' }}>Native Token:</strong> BOT</div>
+              <div><strong style={{ color: 'var(--text-main)' }}>Network:</strong> BotChain Mainnet (Chain ID 677)</div>
+              <div><strong style={{ color: 'var(--text-main)' }}>Native Token:</strong> BOT (150M Supply)</div>
               <div>
-                <strong style={{ color: 'var(--text-main)' }}>Contract:</strong>{' '}
+                <strong style={{ color: 'var(--text-main)' }}>Explorer:</strong>{' '}
                 <a
-                  href="https://scan.bohr.life/address/0x75749a555f5314423e262139df363d08d86296d7"
+                  href="https://scan.botchain.ai"
                   target="_blank"
                   rel="noreferrer"
                   style={{ color: 'var(--yellow-light)', textDecoration: 'none' }}
                 >
-                  0x7574...96d7 ↗
+                  scan.botchain.ai ↗
                 </a>
               </div>
             </div>
@@ -45,7 +45,7 @@ export function WhitepaperModal({ isOpen, onClose }) {
             Blockchains record immutable balances and cryptographic transfers with mathematical precision, yet they are structurally blind to business context, transactional intent, and accounting classifications. A raw transfer of tokens on-chain cannot distinguish between an executive salary payment, an ecosystem grant, a supplier invoice settlement, or an overpayment refund.
           </p>
           <p style={{ marginTop: '8px' }}>
-            The <strong>BOT Transaction Tagger</strong> protocol introduces an open, verifiable, and immutable on-chain annotation layer on Bohr Network. It decouples execution from subjective contextual classification, enabling DAOs, businesses, developers, and accountants to publicly link transaction hashes to standardized categories, invoice identifiers, and immutable audit logs.
+            The <strong>BOT Transaction Tagger</strong> protocol introduces an open, verifiable, and immutable on-chain annotation layer on BotChain. It decouples execution from subjective contextual classification, enabling DAOs, businesses, developers, and accountants to publicly link transaction hashes to standardized categories, invoice identifiers, and immutable audit logs.
           </p>
 
           <h3 style={{ fontSize: '16px', color: 'var(--yellow-light)', marginTop: '20px', marginBottom: '8px' }}>
@@ -82,17 +82,7 @@ export function WhitepaperModal({ isOpen, onClose }) {
           </p>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '24px', paddingTop: '16px', borderTop: '1px solid var(--border-light)', flexWrap: 'wrap', gap: '10px' }}>
-          <a
-            href="https://github.com/webtrovert0x/trns-tag/blob/main/WHITEPAPER.md"
-            target="_blank"
-            rel="noreferrer"
-            className="btn-secondary"
-            style={{ fontSize: '12px' }}
-          >
-            <FileText size={14} />
-            View Full Markdown on GitHub <ExternalLink size={12} />
-          </a>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginTop: '24px', paddingTop: '16px', borderTop: '1px solid var(--border-light)', gap: '10px' }}>
           <button type="button" className="btn-yellow" onClick={onClose}>
             Close Whitepaper
           </button>

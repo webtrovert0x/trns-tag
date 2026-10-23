@@ -1,31 +1,31 @@
 import { createAppKit } from '@reown/appkit/react';
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
 import { http } from 'wagmi';
-import { bohrTestnet } from './bohrChain';
+import { botchainMainnet } from './botchain';
 
 // Reown AppKit Project ID
 export const projectId = import.meta.env.VITE_REOWN_PROJECT_ID || '3a8170812b534d0ff9d794f168fa7d63';
 
-// Setup Wagmi adapter with Bohr Testnet
+// Setup Wagmi adapter with BotChain Mainnet (Chain ID 677)
 export const wagmiAdapter = new WagmiAdapter({
   projectId,
-  networks: [bohrTestnet],
+  networks: [botchainMainnet],
   transports: {
-    [bohrTestnet.id]: http('https://rpc.bohr.life'),
+    [botchainMainnet.id]: http('https://rpc.botchain.ai'),
   },
 });
 
 // Create Reown AppKit modal instance
 export const modal = createAppKit({
   adapters: [wagmiAdapter],
-  networks: [bohrTestnet],
-  defaultNetwork: bohrTestnet,
+  networks: [botchainMainnet],
+  defaultNetwork: botchainMainnet,
   projectId,
   metadata: {
     name: 'BOT Transaction Tagger',
-    description: 'Searchable public tags and annotations on Bohr Network',
-    url: typeof window !== 'undefined' ? window.location.origin : 'https://scan.bohr.life',
-    icons: ['https://scan.bohr.life/favicon.ico'],
+    description: 'Searchable public tags and annotations on BotChain Mainnet',
+    url: typeof window !== 'undefined' ? window.location.origin : 'https://scan.botchain.ai',
+    icons: ['https://scan.botchain.ai/favicon.ico'],
   },
   themeMode: 'dark',
   themeVariables: {

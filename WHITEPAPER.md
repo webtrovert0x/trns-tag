@@ -3,9 +3,9 @@
 
 **Version:** 1.0.0  
 **Published:** October 2026  
-**Network:** Bohr Network (Chain ID: 968)  
-**Contract Address:** [`0x75749a555f5314423e262139df363d08d86296d7`](https://scan.bohr.life/address/0x75749a555f5314423e262139df363d08d86296d7)  
-**Native Currency:** BOT  
+**Network:** BotChain Mainnet (Chain ID: 677)  
+**Contract Address:** [`0xfa14bde4808aeb8c0c925d7a268882ef1300cbcc`](https://scan.botchain.ai/address/0xfa14bde4808aeb8c0c925d7a268882ef1300cbcc)  
+**Native Currency:** BOT (150 Million Total Supply)  
 **Target Audience:** DAOs, Accountants, Developers, Auditors, and Web3 Businesses  
 
 ---
@@ -14,7 +14,7 @@
 
 Blockchain ledgers provide cryptographically undeniable proof of asset ownership and transfers, yet they are structurally blind to business context, transactional intent, and accounting classifications. A raw transfer of tokens recorded on-chain cannot distinguish between an executive salary payment, an ecosystem grant, a supplier invoice settlement, or a mistaken transaction refund. Traditional organizations reconcile this gap using centralized, off-chain Enterprise Resource Planning (ERP) databases, re-introducing data silos, counterparty discrepancies, and single points of evidentiary failure.
 
-The **BOT Transaction Tagger** protocol introduces an open, verifiable, and immutable on-chain annotation layer on the Bohr Network. By decoupling execution from subjective contextual classification, the protocol enables DAOs, businesses, developers, and accountants to publicly link transaction hashes to standardized categories, invoice identifiers, and immutable audit logs. Importantly, the protocol enforces strict epistemological separation: **tags are decentralized annotations, not cryptographic proof of transaction legitimacy or fiscal accuracy.** This paper outlines the protocol's architecture, data models, audit history mechanisms, security trade-offs, and deployment on Bohr Testnet.
+The **BOT Transaction Tagger** protocol introduces an open, verifiable, and immutable on-chain annotation layer on BotChain Mainnet. By decoupling execution from subjective contextual classification, the protocol enables DAOs, businesses, developers, and accountants to publicly link transaction hashes to standardized categories, invoice identifiers, and immutable audit logs. Importantly, the protocol enforces strict epistemological separation: **tags are decentralized annotations, not cryptographic proof of transaction legitimacy or fiscal accuracy.** This paper outlines the protocol's architecture, data models, audit history mechanisms, security trade-offs, and deployment on BotChain Mainnet.
 
 ---
 
@@ -41,7 +41,7 @@ Historically, crypto organizations attempted to resolve this through centralized
 
 ## 2. Protocol Architecture
 
-The BOT Transaction Tagger protocol operates as a modular, permissionless smart contract deployed on Bohr Network: [`TransactionTagRegistry.sol`](./contracts/TransactionTagRegistry.sol).
+The BOT Transaction Tagger protocol operates as a modular, permissionless smart contract deployed on BotChain Mainnet: [`TransactionTagRegistry.sol`](./contracts/TransactionTagRegistry.sol).
 
 ```
 +-----------------------------------------------------------------------+
@@ -58,7 +58,7 @@ The BOT Transaction Tagger protocol operates as a modular, permissionless smart 
                                    v
 +-----------------------------------------------------------------------+
 |                    TRANSACTION TAG REGISTRY (ON-CHAIN)                |
-|                    TransactionTagRegistry.sol (BOHR: 968)             |
+|                    TransactionTagRegistry.sol (BotChain: 677)         |
 |                                                                       |
 |  [tagTransaction]       [updateTag]             [revokeTag]           |
 |         |                     |                       |               |
@@ -168,15 +168,15 @@ Only the address that originally authored the tag possesses the cryptographic au
 
 ---
 
-## 6. Bohr Network (Chain ID 968) Implementation
+## 6. BotChain Mainnet (Chain ID 677) Implementation
 
 ### 6.1 Network Specifications
-- **Network Name**: Bohr Testnet
-- **Chain ID**: `968`
-- **Native Gas Token**: `BOT` (18 decimals)
-- **RPC Endpoint**: `https://rpc.bohr.life`
-- **Block Explorer**: [https://scan.bohr.life/](https://scan.bohr.life/)
-- **Verified Contract**: [`0x75749a555f5314423e262139df363d08d86296d7`](https://scan.bohr.life/address/0x75749a555f5314423e262139df363d08d86296d7)
+- **Network Name**: BotChain Mainnet
+- **Chain ID**: `677`
+- **Native Gas Token**: `BOT` (18 decimals, 150 Million Total Supply)
+- **RPC Endpoint**: `https://rpc.botchain.ai`
+- **Block Explorer**: [https://scan.botchain.ai/](https://scan.botchain.ai/)
+- **Verified Contract**: [`0xfa14bde4808aeb8c0c925d7a268882ef1300cbcc`](https://scan.botchain.ai/address/0xfa14bde4808aeb8c0c925d7a268882ef1300cbcc)
 
 ### 6.2 Gas Efficiency Optimizations
 1. **Packed Struct Storage**: Numerical timestamps (`uint64`), version numbers (`uint32`), and boolean flags are tightly packed within single 256-bit storage slots.
@@ -200,11 +200,11 @@ Freelancers and vendors link transactions directly to invoice numbers and Arweav
 
 ## 8. Conclusion
 
-The **BOT Transaction Tagger** bridges the semantic divide between raw cryptographic state transitions and real-world accounting workflows. By anchoring standardized categories, invoice cross-references, and immutable change histories directly onto the Bohr Network, the protocol establishes a public, decentralized foundation for modern digital asset accounting.
+The **BOT Transaction Tagger** bridges the semantic divide between raw cryptographic state transitions and real-world accounting workflows. By anchoring standardized categories, invoice cross-references, and immutable change histories directly onto BotChain Mainnet, the protocol establishes a public, decentralized foundation for modern digital asset accounting.
 
 ---
 
 ### Contract Verification & Source Code
 The contract source code, deployment artifacts, and ABI are open-source and publicly verified:
 - **GitHub Repository**: [https://github.com/webtrovert0x/trns-tag](https://github.com/webtrovert0x/trns-tag)
-- **Explorer Verified Contract**: [https://scan.bohr.life/address/0x75749a555f5314423e262139df363d08d86296d7](https://scan.bohr.life/address/0x75749a555f5314423e262139df363d08d86296d7)
+- **Explorer Verified Contract**: [https://scan.botchain.ai/address/0xfa14bde4808aeb8c0c925d7a268882ef1300cbcc](https://scan.botchain.ai/address/0xfa14bde4808aeb8c0c925d7a268882ef1300cbcc)

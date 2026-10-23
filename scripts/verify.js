@@ -13,6 +13,8 @@ const contractConfigPath = path.resolve(__dirname, '../src/config/contract.json'
 const contractConfig = JSON.parse(fs.readFileSync(contractConfigPath, 'utf8'));
 const contractAddress = contractConfig.contractAddress;
 
+const EXPLORER_URL = 'https://scan.botchain.ai';
+
 async function verifyEtherscanApi(compilerVersion) {
   console.log(`\nSubmitting via Etherscan/Blockscout API with version: ${compilerVersion}...`);
 
@@ -27,7 +29,7 @@ async function verifyEtherscanApi(compilerVersion) {
   formData.append('optimizationUsed', '1');
   formData.append('runs', '200');
 
-  const res = await fetch('https://scan.bohr.life/api', {
+  const res = await fetch(`${EXPLORER_URL}/api`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: formData.toString(),
@@ -53,7 +55,7 @@ async function verifyBlockscoutV2(compilerVersion) {
     license_type: 'mit',
   };
 
-  const res = await fetch(`https://scan.bohr.life/api/v2/smart-contracts/${contractAddress}/verification/via/flattened-code`, {
+  const res = await fetch(`${EXPLORER_URL}/api/v2/smart-contracts/${contractAddress}/verification/via/flattened-code`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -64,22 +66,25 @@ async function verifyBlockscoutV2(compilerVersion) {
 }
 
 async function checkStatus() {
-  const res = await fetch(`https://scan.bohr.life/api?module=contract&action=getabi&address=${contractAddress}`);
+  const res = await fetch(`${EXPLORER_URL}/api?module=contract&action=getabi&address=${contractAddress}`);
   const json = await res.json();
   return json;
 }
 
 async function main() {
+  console.log(`=======================================================`);
+  console.log(`🔍 VERIFYING ON BOTCHAIN MAINNET EXPLORER`);
+  console.log(`=======================================================`);
   console.log(`Target Contract: ${contractAddress}`);
 
   await verifyEtherscanApi('v0.8.28+commit.7893614a');
   await verifyBlockscoutV2('v0.8.28+commit.7893614a');
 
-  console.log('\nChecking contract status on BohrScan in 10 seconds...');
+  console.log('\nChecking contract status on BotChain Explorer in 10 seconds...');
   await new Promise((r) => setTimeout(r, 10000));
 
   const status = await checkStatus();
-  console.log('\nVerification Status on BohrScan:', status);
+  console.log('\nVerification Status on BotChain Explorer:', status);
 }
 
 main().catch(console.error);

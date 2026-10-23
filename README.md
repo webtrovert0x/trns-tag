@@ -1,22 +1,22 @@
 # BOT Transaction Tagger
 
-A decentralized, searchable public transaction annotation and audit registry built for **DAOs, accountants, developers, and businesses** on the **Bohr Network (Chain ID: 968)**.
+A decentralized, searchable public transaction annotation and audit registry built for **DAOs, accountants, developers, and businesses** on **BotChain Mainnet (Chain ID: 677)**.
 
 > **LEGAL & AUDITING NOTICE & DISCLAIMER**  
 > *Tags are public annotations and subjective metadata, NOT cryptographic proof that a payment was legitimate, approved, or correctly categorized.*
 
 ---
 
-## 🚀 Live Bohr Testnet Deployment
+## 🚀 Live BotChain Mainnet Deployment
 
 - **Contract Name**: [`TransactionTagRegistry.sol`](./contracts/TransactionTagRegistry.sol)
-- **Verified Contract Address**: [`0x75749a555f5314423e262139df363d08d86296d7`](https://scan.bohr.life/address/0x75749a555f5314423e262139df363d08d86296d7)
-- **Deployment Transaction**: [`0x31f6613a5a7c2d81cb1fefc9d6fa0c48b5c86c6dd26b57491f9fbc24283046ee`](https://scan.bohr.life/tx/0x31f6613a5a7c2d81cb1fefc9d6fa0c48b5c86c6dd26b57491f9fbc24283046ee)
-- **Verification Status**: ✅ Verified on BohrScan (`v0.8.28+commit.7893614a`)
-- **Chain ID**: `968`
-- **RPC URL**: `https://rpc.bohr.life`
-- **Native Token**: `BOT`
-- **Block Explorer**: [https://scan.bohr.life/](https://scan.bohr.life/)
+- **Verified Contract Address**: [`0xfa14bde4808aeb8c0c925d7a268882ef1300cbcc`](https://scan.botchain.ai/address/0xfa14bde4808aeb8c0c925d7a268882ef1300cbcc)
+- **Deployment Transaction**: [`0x5a1b64449b0f4187fa094663ed70fa680d59e54f7ba2ee972f35a2cfe8e29659`](https://scan.botchain.ai/tx/0x5a1b64449b0f4187fa094663ed70fa680d59e54f7ba2ee972f35a2cfe8e29659)
+- **Verification Status**: ✅ Verified on BotChainScan (`v0.8.28+commit.7893614a`)
+- **Chain ID**: `677`
+- **RPC URL**: `https://rpc.botchain.ai`
+- **Native Token**: `BOT` (150 Million Total Supply)
+- **Block Explorer**: [https://scan.botchain.ai/](https://scan.botchain.ai/)
 
 ---
 
@@ -39,7 +39,7 @@ A decentralized, searchable public transaction annotation and audit registry bui
    - Every tag revision or retraction stores an entry with the author's stated reason for change (`changeReason`), block timestamp, and action (`CREATED`, `UPDATED`, `REVOKED`).
 
 4. **Zero Mock Data Architecture**:
-   - 100% live on-chain reads and writes via Wagmi v2, Viem, and Reown AppKit directly to Bohr Testnet.
+   - 100% live on-chain reads and writes via Wagmi v2, Viem, and Reown AppKit directly to BotChain Mainnet.
 
 5. **Tailored UI Design**:
    - Sleek grayish-black background (`#0e1015`) with prominent light yellow buttons (`#fde047` / `#fef08a`).
@@ -58,7 +58,7 @@ The `.env` file contains network settings and the deployed contract address:
 ```ini
 PRIVATE_KEY=your_private_key_here
 VITE_REOWN_PROJECT_ID=3a8170812b534d0ff9d794f168fa7d63
-VITE_CONTRACT_ADDRESS=0x2d028ab03477acc07322d49e9c4bfd058644ba0e
+VITE_CONTRACT_ADDRESS=0xfa14bde4808aeb8c0c925d7a268882ef1300cbcc
 ```
 
 ### 3. Deploy & Verify Contract

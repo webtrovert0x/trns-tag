@@ -111,7 +111,7 @@ export function TransactionExplorer({ onSelectHistory, onSelectEdit, onSelectRev
           disabled={isSearching || !searchQuery.trim()}
           style={{ whiteSpace: 'nowrap' }}
         >
-          {isSearching ? 'Searching Bohr...' : 'Search Registry'}
+          {isSearching ? 'Searching BotChain...' : 'Search Registry'}
         </button>
       </form>
 
@@ -135,7 +135,7 @@ export function TransactionExplorer({ onSelectHistory, onSelectEdit, onSelectRev
               <TagIcon className="empty-state-icon" />
               <h3 className="empty-state-title">No Annotations Found</h3>
               <p className="empty-state-desc">
-                No tags recorded on Bohr Testnet match this transaction or address query yet.
+                No tags recorded on BotChain Mainnet match this transaction or address query yet.
               </p>
               {onOpenTagTab && (
                 <button
@@ -216,7 +216,7 @@ export function TransactionExplorer({ onSelectHistory, onSelectEdit, onSelectRev
                       <div className="data-item-label">Target Transaction Hash</div>
                       <div className="data-item-value" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <a
-                          href={`https://scan.bohr.life/tx/${tag.txHash}`}
+                          href={`https://scan.botchain.ai/tx/${tag.txHash}`}
                           target="_blank"
                           rel="noreferrer"
                           style={{ color: 'var(--yellow-light)', textDecoration: 'none', fontFamily: 'var(--font-mono)' }}
@@ -230,7 +230,7 @@ export function TransactionExplorer({ onSelectHistory, onSelectEdit, onSelectRev
                         >
                           {copiedId === `tx-${tagIdNum}` ? <Check size={12} color="#4ade80" /> : <Copy size={12} />}
                         </button>
-                        <a href={`https://scan.bohr.life/tx/${tag.txHash}`} target="_blank" rel="noreferrer" style={{ color: 'var(--text-muted)' }}>
+                        <a href={`https://scan.botchain.ai/tx/${tag.txHash}`} target="_blank" rel="noreferrer" style={{ color: 'var(--text-muted)' }}>
                           <ExternalLink size={12} />
                         </a>
                       </div>
@@ -240,7 +240,7 @@ export function TransactionExplorer({ onSelectHistory, onSelectEdit, onSelectRev
                       <div className="data-item-label">Tagger / Author</div>
                       <div className="data-item-value" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <a
-                          href={`https://scan.bohr.life/address/${tag.tagger}`}
+                          href={`https://scan.botchain.ai/address/${tag.tagger}`}
                           target="_blank"
                           rel="noreferrer"
                           style={{ color: 'var(--text-main)', textDecoration: 'none', fontFamily: 'var(--font-mono)' }}

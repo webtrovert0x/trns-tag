@@ -3,19 +3,18 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import { createWalletClient, createPublicClient, http } from 'viem';
+import { createWalletClient, createPublicClient, http, defineChain, formatEther } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
-import { defineChain } from 'viem';
 
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Define Bohr Network (Chain ID: 968)
-export const bohrTestnet = defineChain({
-  id: 968,
-  name: 'Bohr Testnet',
+// Define BotChain Mainnet (Chain ID: 677)
+export const botchainMainnet = defineChain({
+  id: 677,
+  name: 'BotChain Mainnet',
   nativeCurrency: {
     decimals: 18,
     name: 'BOT',
@@ -23,44 +22,49 @@ export const bohrTestnet = defineChain({
   },
   rpcUrls: {
     default: {
-      http: ['https://rpc.bohr.life'],
+      http: ['https://rpc.botchain.ai'],
     },
     public: {
-      http: ['https://rpc.bohr.life'],
+      http: ['https://rpc.botchain.ai'],
     },
   },
   blockExplorers: {
-    default: { name: 'BohrScan', url: 'https://scan.bohr.life' },
+    default: { name: 'BotChainScan', url: 'https://scan.botchain.ai' },
   },
-  testnet: true,
+  testnet: false,
 });
 
 async function main() {
   const privateKey = process.env.PRIVATE_KEY;
-  if (!privateKey) {
+  if (!privateKey || !privateKey.trim()) {
     console.error('Error: PRIVATE_KEY is not defined in .env');
-    console.error('Please create a .env file with: PRIVATE_KEY=0x...');
+    console.error('Please add your deployment private key to .env: PRIVATE_KEY=0x...');
     process.exit(1);
   }
 
-  const formattedKey = privateKey.startsWith('0x') ? privateKey : `0x${privateKey}`;
+  const cleanKey = privateKey.trim();
+  const formattedKey = cleanKey.startsWith('0x') ? cleanKey : `0x${cleanKey}`;
   const account = privateKeyToAccount(formattedKey);
 
-  console.log(`Deployer address: ${account.address}`);
+  console.log(`=======================================================`);
+  console.log(`🚀 DEPLOYING TO BOTCHAIN MAINNET (Chain ID: 677)`);
+  console.log(`=======================================================`);
+  console.log(`Deployer address : ${account.address}`);
 
   const publicClient = createPublicClient({
-    chain: bohrTestnet,
-    transport: http('https://rpc.bohr.life'),
+    chain: botchainMainnet,
+    transport: http('https://rpc.botchain.ai'),
   });
 
   const walletClient = createWalletClient({
     account,
-    chain: bohrTestnet,
-    transport: http('https://rpc.bohr.life'),
+    chain: botchainMainnet,
+    transport: http('https://rpc.botchain.ai'),
   });
 
   const balance = await publicClient.getBalance({ address: account.address });
-  console.log(`Account balance: ${Number(balance) / 1e18} BOT`);
+  const balanceFormatted = formatEther(balance);
+  console.log(`Account balance  : ${balanceFormatted} BOT`);
 
   const artifactPath = path.resolve(__dirname, '../src/contracts/TransactionTagRegistry.json');
   if (!fs.existsSync(artifactPath)) {
@@ -71,35 +75,75 @@ async function main() {
 
   const { abi, bytecode } = JSON.parse(fs.readFileSync(artifactPath, 'utf8'));
 
-  console.log('Deploying TransactionTagRegistry to Bohr Testnet (Chain ID 968)...');
+  // 1. Fetch current gas price from BotChain Mainnet RPC
+  const currentGasPrice = await publicClient.getGasPrice();
+  const gasPriceGwei = Number(currentGasPrice) / 1e9;
+  console.log(`Current Gas Price: ${gasPriceGwei.toFixed(2)} Gwei (${currentGasPrice} wei)`);
+
+  // 2. Gas Estimation to avoid wasting gas
+  console.log('Estimating deployment gas...');
+  const deployBytecode = `0x${bytecode}`;
+  let estimatedGas;
+  try {
+    estimatedGas = await publicClient.estimateGas({
+      account,
+      data: deployBytecode,
+    });
+  } catch (err) {
+    console.warn('Estimate gas fallback (using 2,800,000 gas limit)...');
+    estimatedGas = 2800000n;
+  }
+
+  // Add modest 5% buffer for safety without inflating fees
+  const gasLimit = (estimatedGas * 105n) / 100n;
+  const estimatedCostWei = gasLimit * currentGasPrice;
+  const estimatedCostBOT = formatEther(estimatedCostWei);
+
+  console.log(`Estimated Gas    : ${estimatedGas.toString()} units`);
+  console.log(`Gas Limit Set    : ${gasLimit.toString()} units (optimized)`);
+  console.log(`Estimated Fee    : ~${estimatedCostBOT} BOT`);
+
+  if (balance < estimatedCostWei) {
+    console.error(`\n❌ Insufficient balance!`);
+    console.error(`Required: ~${estimatedCostBOT} BOT | Available: ${balanceFormatted} BOT`);
+    process.exit(1);
+  }
+
+  console.log('\nSubmitting deployment transaction to BotChain Mainnet...');
 
   const hash = await walletClient.deployContract({
     abi,
-    bytecode: `0x${bytecode}`,
+    bytecode: deployBytecode,
+    gas: gasLimit,
+    gasPrice: currentGasPrice,
   });
 
-  console.log(`Deployment transaction submitted. Hash: ${hash}`);
-  console.log(`Check on explorer: https://scan.bohr.life/tx/${hash}`);
-  console.log('Waiting for confirmation...');
+  console.log(`Transaction sent! Hash: ${hash}`);
+  console.log(`Explorer: https://scan.botchain.ai/tx/${hash}`);
+  console.log('Waiting for block confirmation on BotChain...');
 
   const receipt = await publicClient.waitForTransactionReceipt({ hash });
   const contractAddress = receipt.contractAddress;
+  const actualGasUsed = receipt.gasUsed;
+  const actualFeeBOT = formatEther(actualGasUsed * currentGasPrice);
 
-  console.log(`\n🎉 TransactionTagRegistry successfully deployed!`);
-  console.log(`Contract Address: ${contractAddress}`);
-  console.log(`Explorer URL: https://scan.bohr.life/address/${contractAddress}`);
+  console.log(`\n🎉 TransactionTagRegistry deployed to BotChain Mainnet!`);
+  console.log(`Contract Address : ${contractAddress}`);
+  console.log(`Actual Gas Used  : ${actualGasUsed.toString()} units`);
+  console.log(`Actual Cost Paid : ${actualFeeBOT} BOT`);
+  console.log(`Explorer Link    : https://scan.botchain.ai/address/${contractAddress}`);
 
-  // Automatically update contract config for the frontend
+  // Automatically update contract.json for the frontend
   const configDir = path.resolve(__dirname, '../src/config');
   fs.mkdirSync(configDir, { recursive: true });
   fs.writeFileSync(
     path.join(configDir, 'contract.json'),
     JSON.stringify(
       {
-        chainId: 968,
-        chainName: 'Bohr Testnet',
-        rpcUrl: 'https://rpc.bohr.life',
-        explorerUrl: 'https://scan.bohr.life',
+        chainId: 677,
+        chainName: 'BotChain Mainnet',
+        rpcUrl: 'https://rpc.botchain.ai',
+        explorerUrl: 'https://scan.botchain.ai',
         contractAddress,
         deployedAt: new Date().toISOString(),
       },
@@ -108,7 +152,22 @@ async function main() {
     )
   );
 
-  console.log(`Updated src/config/contract.json with new contract address.`);
+  // Update .env VITE_CONTRACT_ADDRESS
+  const envPath = path.resolve(__dirname, '../.env');
+  if (fs.existsSync(envPath)) {
+    let envContent = fs.readFileSync(envPath, 'utf8');
+    if (envContent.includes('VITE_CONTRACT_ADDRESS=')) {
+      envContent = envContent.replace(
+        /VITE_CONTRACT_ADDRESS=.*/,
+        `VITE_CONTRACT_ADDRESS=${contractAddress}`
+      );
+    } else {
+      envContent += `\nVITE_CONTRACT_ADDRESS=${contractAddress}`;
+    }
+    fs.writeFileSync(envPath, envContent);
+  }
+
+  console.log(`\nUpdated src/config/contract.json & .env with new mainnet contract address.`);
 }
 
 main().catch((err) => {

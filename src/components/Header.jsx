@@ -3,6 +3,7 @@ import { useAccount, useDisconnect } from 'wagmi';
 import { useAppKit } from '@reown/appkit/react';
 import { Tag, ShieldCheck, ExternalLink, Settings, Wallet, CheckCircle2, AlertCircle, BookOpen } from 'lucide-react';
 import { CONTRACT_ADDRESS, formatAddress } from '../config/contractConfig';
+import { BotChainLogo } from './EcosystemFooter';
 
 export function Header({ onOpenSettings, onOpenWhitepaper }) {
   const { address, isConnected, chainId } = useAccount();
@@ -10,12 +11,12 @@ export function Header({ onOpenSettings, onOpenWhitepaper }) {
   const { open } = useAppKit();
   const [blockNumber, setBlockNumber] = useState(null);
 
-  // Fetch current block from Bohr RPC
+  // Fetch current block from BotChain RPC
   useEffect(() => {
     let isMounted = true;
     async function fetchBlock() {
       try {
-        const res = await fetch('https://rpc.bohr.life', {
+        const res = await fetch('https://rpc.botchain.ai', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -52,8 +53,9 @@ export function Header({ onOpenSettings, onOpenWhitepaper }) {
           <div className="brand-info">
             <h1>
               BOT Transaction Tagger
-              <span style={{ fontSize: '11px', background: 'var(--yellow-subtle)', color: 'var(--yellow-light)', padding: '2px 8px', borderRadius: '4px', border: '1px solid var(--border-accent)' }}>
-                BOHR 968
+              <span style={{ fontSize: '11px', background: 'var(--yellow-subtle)', color: 'var(--yellow-light)', padding: '2px 8px', borderRadius: '4px', border: '1px solid var(--border-accent)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                <BotChainLogo size={13} />
+                BOT CHAIN 677
               </span>
             </h1>
             <p className="brand-subtitle">
@@ -76,9 +78,9 @@ export function Header({ onOpenSettings, onOpenWhitepaper }) {
           </button>
 
           {/* Live RPC Status */}
-          <div className="network-badge" title="Connected to Bohr Testnet RPC (Chain ID 968)">
+          <div className="network-badge" title="Connected to BotChain Mainnet RPC (Chain ID 677)">
             <span className="pulse-dot"></span>
-            <span>Bohr Testnet</span>
+            <span>BotChain Mainnet</span>
             {blockNumber && (
               <span style={{ color: 'var(--text-muted)', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
                 #{blockNumber.toLocaleString()}

@@ -90,7 +90,7 @@ export function RecentActivityView({ onSelectHistory, onOpenTagTab, onSearchTx, 
             Network / Layer
           </div>
           <div style={{ fontSize: '18px', fontWeight: '700', color: '#4ade80', marginTop: '4px' }}>
-            Bohr Testnet (BOT)
+            BotChain Mainnet (BOT)
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@ export function RecentActivityView({ onSelectHistory, onOpenTagTab, onSearchTx, 
               Recent On-Chain Annotations
             </h2>
             <p className="card-desc">
-              Live transaction tags recorded on Bohr Testnet by DAOs, accountants, and businesses.
+              Live transaction tags recorded on BotChain Mainnet by DAOs, accountants, and businesses.
             </p>
           </div>
           <button
@@ -120,7 +120,7 @@ export function RecentActivityView({ onSelectHistory, onOpenTagTab, onSearchTx, 
         {loading ? (
           <div style={{ textAlign: 'center', padding: '40px 0', color: 'var(--text-muted)' }}>
             <Loader2 size={28} className="animate-spin" style={{ margin: '0 auto 10px', color: 'var(--yellow-primary)' }} />
-            <div>Reading live transactions from Bohr Testnet...</div>
+            <div>Reading live transactions from BotChain Mainnet...</div>
           </div>
         ) : error ? (
           <div style={{ background: 'var(--danger-bg)', padding: '12px', borderRadius: 'var(--radius-md)', color: '#fca5a5', fontSize: '13px' }}>
@@ -131,7 +131,7 @@ export function RecentActivityView({ onSelectHistory, onOpenTagTab, onSearchTx, 
             <Activity className="empty-state-icon" />
             <h3 className="empty-state-title">No Transactions Tagged Yet</h3>
             <p className="empty-state-desc">
-              Be the first to annotate a transaction on Bohr Testnet. Categorize a salary, grant, donation, invoice, or project budget.
+              Be the first to annotate a transaction on BotChain Mainnet. Categorize a salary, grant, donation, invoice, or project budget.
             </p>
             <button
               type="button"
@@ -195,7 +195,7 @@ export function RecentActivityView({ onSelectHistory, onOpenTagTab, onSearchTx, 
                     <div className="data-item-label">Transaction Hash</div>
                     <div className="data-item-value" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <a
-                        href={`https://scan.bohr.life/tx/${tag.txHash}`}
+                        href={`https://scan.botchain.ai/tx/${tag.txHash}`}
                         target="_blank"
                         rel="noreferrer"
                         style={{ color: 'var(--yellow-light)', textDecoration: 'none', fontFamily: 'var(--font-mono)' }}
@@ -209,7 +209,7 @@ export function RecentActivityView({ onSelectHistory, onOpenTagTab, onSearchTx, 
                       >
                         {copiedId === `recent-tx-${tagIdNum}` ? <Check size={12} color="#4ade80" /> : <Copy size={12} />}
                       </button>
-                      <a href={`https://scan.bohr.life/tx/${tag.txHash}`} target="_blank" rel="noreferrer" style={{ color: 'var(--text-muted)' }}>
+                      <a href={`https://scan.botchain.ai/tx/${tag.txHash}`} target="_blank" rel="noreferrer" style={{ color: 'var(--text-muted)' }}>
                         <ExternalLink size={12} />
                       </a>
                     </div>
@@ -219,7 +219,7 @@ export function RecentActivityView({ onSelectHistory, onOpenTagTab, onSearchTx, 
                     <div className="data-item-label">Tagger / Entity</div>
                     <div className="data-item-value" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <a
-                        href={`https://scan.bohr.life/address/${tag.tagger}`}
+                        href={`https://scan.botchain.ai/address/${tag.tagger}`}
                         target="_blank"
                         rel="noreferrer"
                         style={{ color: 'var(--text-main)', textDecoration: 'none', fontFamily: 'var(--font-mono)' }}

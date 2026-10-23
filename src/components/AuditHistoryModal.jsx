@@ -76,7 +76,7 @@ export function AuditHistoryModal({ isOpen, tagId, tagData, onClose }) {
         {loading ? (
           <div style={{ textAlign: 'center', padding: '36px 0', color: 'var(--text-muted)' }}>
             <Loader2 size={28} className="animate-spin" style={{ margin: '0 auto 8px', color: 'var(--yellow-primary)' }} />
-            <div>Fetching full audit trail from Bohr Testnet...</div>
+            <div>Fetching full audit trail from BotChain Mainnet...</div>
           </div>
         ) : error ? (
           <div style={{ background: 'var(--danger-bg)', padding: '12px', borderRadius: 'var(--radius-md)', color: '#fca5a5', fontSize: '13px' }}>

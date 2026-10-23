@@ -62,7 +62,7 @@ export function RevokeTagModal({ isOpen, tagId, tagData, onClose, onRevoked }) {
               Annotation Revoked
             </h3>
             <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '20px' }}>
-              The tag has been marked as revoked on Bohr Testnet. The historical record remains visible for accounting audits.
+              The tag has been marked as revoked on BotChain Mainnet. The historical record remains visible for accounting audits.
             </p>
             <button type="button" className="btn-yellow" onClick={handleDone}>
               Close & Refresh
@@ -117,7 +117,7 @@ export function RevokeTagModal({ isOpen, tagId, tagData, onClose, onRevoked }) {
                 ) : isConfirming ? (
                   <>
                     <Loader2 size={15} className="animate-spin" />
-                    Revoking on Bohr...
+                    Revoking on BotChain...
                   </>
                 ) : (
                   'Confirm Revocation'

@@ -13,6 +13,7 @@ import { AuditHistoryModal } from './components/AuditHistoryModal';
 import { EditTagModal } from './components/EditTagModal';
 import { RevokeTagModal } from './components/RevokeTagModal';
 import { WhitepaperModal } from './components/WhitepaperModal';
+import { EcosystemFooter } from './components/EcosystemFooter';
 import { Tag, Search, UserCheck, Activity, ExternalLink, ShieldCheck, BookOpen } from 'lucide-react';
 import { CONTRACT_ADDRESS } from './config/contractConfig';
 
@@ -150,34 +151,11 @@ function MainApp() {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="app-footer">
-        <div>
-          <strong>BOT Transaction Tagger</strong> • Built for DAOs, Accountants, Developers & Businesses on Bohr Network
-        </div>
-        <div className="footer-links">
-          <a href="https://scan.bohr.life" target="_blank" rel="noreferrer">
-            BohrScan Explorer <ExternalLink size={12} style={{ display: 'inline', verticalAlign: 'middle' }} />
-          </a>
-          <a href="https://rpc.bohr.life" target="_blank" rel="noreferrer">
-            Bohr RPC Endpoint
-          </a>
-          <button
-            type="button"
-            onClick={() => setIsWhitepaperOpen(true)}
-            style={{ background: 'transparent', border: 'none', color: 'var(--yellow-light)', cursor: 'pointer', fontSize: '13px', textDecoration: 'underline' }}
-          >
-            Technical Whitepaper
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsSettingsOpen(true)}
-            style={{ background: 'transparent', border: 'none', color: 'var(--yellow-light)', cursor: 'pointer', fontSize: '13px', textDecoration: 'underline' }}
-          >
-            Contract Configuration
-          </button>
-        </div>
-      </footer>
+      {/* BOT Chain Ecosystem Showcase & Footer */}
+      <EcosystemFooter
+        onOpenWhitepaper={() => setIsWhitepaperOpen(true)}
+        onOpenSettings={() => setIsSettingsOpen(true)}
+      />
 
       {/* Modals */}
       <WhitepaperModal

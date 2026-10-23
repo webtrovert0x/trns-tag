@@ -82,7 +82,7 @@ export function TagTransactionForm({ onTagSuccess, onOpenSettings }) {
           Tag & Annotate a Blockchain Transaction
         </h2>
         <p className="card-desc">
-          Add public accounting notes, project budget attribution, or invoice links directly on Bohr Testnet.
+          Add public accounting notes, project budget attribution, or invoice links directly on BotChain Mainnet.
         </p>
       </div>
 
@@ -107,18 +107,18 @@ export function TagTransactionForm({ onTagSuccess, onOpenSettings }) {
             Transaction Successfully Tagged!
           </h3>
           <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '16px' }}>
-            Your annotation has been permanently recorded on Bohr Testnet.
+            Your annotation has been permanently recorded on BotChain Mainnet.
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
             <a
-              href={`https://scan.bohr.life/tx/${writeHash}`}
+              href={`https://scan.botchain.ai/tx/${writeHash}`}
               target="_blank"
               rel="noreferrer"
               className="btn-secondary"
               style={{ fontSize: '13px' }}
             >
-              View on BohrScan <ExternalLink size={14} />
+              View on BotChainScan <ExternalLink size={14} />
             </a>
             <button
               type="button"
@@ -136,7 +136,7 @@ export function TagTransactionForm({ onTagSuccess, onOpenSettings }) {
           <div className="form-group">
             <label className="form-label" htmlFor="txHashInput">
               <span>Target Transaction Hash (0x...) *</span>
-              <span className="form-hint">EVM Transaction Hash on Bohr or associated chain</span>
+              <span className="form-hint">EVM Transaction Hash on BotChain (66-character hex)</span>
             </label>
             <input
               id="txHashInput"
@@ -265,7 +265,7 @@ export function TagTransactionForm({ onTagSuccess, onOpenSettings }) {
                 ) : isConfirming ? (
                   <>
                     <Loader2 size={16} className="animate-spin" />
-                    Recording on Bohr...
+                    Recording on BotChain...
                   </>
                 ) : (
                   <>
